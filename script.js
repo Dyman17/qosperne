@@ -1,7 +1,7 @@
 // Qos Perne — landing logic
-// TODO(владелец): заменить WHATSAPP_URL на реальный инвайт
+// WhatsApp группа клуба (линк вставлен ✅)
 
-const WHATSAPP_URL = "https://chat.whatsapp.com/PLACEHOLDER_QOSPERNE";
+const WHATSAPP_URL = "https://chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g";
 
 const nav = document.getElementById("nav");
 const burger = document.getElementById("burger");
