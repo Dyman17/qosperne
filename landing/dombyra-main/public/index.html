@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qos Perne — Репертуар • Кім қандай күй біледі?</title>
+<meta name="description" content="Qos Perne: поиск участников по репертуару. Кто знает какой кюй.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+/* Qos Perne style — см. STYLE_GUIDE.md в корне репозитория */
+:root{
+  --bg:#0d0b08; --card:#1c1610; --gold:#c9a227; --gold2:#e8c35a; --gold-deep:#8a6d14;
+  --ink:#1a140d; --paper:#f7f1e5; --muted:#9b8d6f; --line:rgba(201,162,39,.28);
+  --font-d:'Playfair Display','Marcellus',serif; --font-b:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-b);color:#f2e8d2;
+  background:radial-gradient(1000px 500px at 20% 0%,#2a2113,transparent),var(--bg);
+  min-height:100vh}
+h1,h2,h3{font-family:var(--font-d);line-height:1.05}
+a{color:var(--gold2)}
+.topbar{border-bottom:1px solid var(--line);background:rgba(13,11,8,.7);
+  backdrop-filter:blur(10px);position:sticky;top:0;z-index:10}
+.topbar-in{max-width:880px;margin:auto;padding:12px 20px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.brand-mark{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#191204;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-weight:800}
+.brand strong{letter-spacing:.16em;font-size:.95rem;display:block}
+.brand small{color:var(--gold2);font-size:.7rem;letter-spacing:.08em}
+.top-links{display:flex;gap:10px;align-items:center}
+.container{max-width:880px;margin:auto;padding:34px 20px 60px}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;font-size:.72rem;color:var(--gold2);
+  font-weight:800;margin:0 0 8px}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);margin:.1em 0 .2em;color:#fff}
+h1 em{color:var(--gold2)}
+.sub{color:#cbbd9c;line-height:1.6;margin:0 0 22px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:10px 16px;background:rgba(201,162,39,.07)}
+.stat b{font-family:var(--font-d);color:var(--gold2);font-size:1.2rem;margin-right:8px}
+.stat span{color:#cbbd9c;font-size:.85rem}
+.card{background:linear-gradient(180deg,#221a10,#171208);border:1px solid var(--line);
+  border-radius:20px;padding:24px;position:relative;overflow:hidden;margin-bottom:18px}
+.card::after{content:"";position:absolute;inset:0 0 auto 0;height:4px;
+  background:linear-gradient(90deg,var(--gold2),transparent)}
+label{display:block;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold2);font-weight:800;margin:14px 0 6px}
+input{width:100%;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.07);color:#fff;padding:14px 20px;font-size:1rem;outline:none}
+input::placeholder{color:var(--muted)}
+input:focus{border-color:var(--gold2);box-shadow:0 0 0 3px rgba(201,162,39,.2)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;
+  font-weight:800;cursor:pointer;border:1px solid transparent;padding:13px 24px;font-size:.95rem;
+  text-decoration:none;transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:linear-gradient(135deg,var(--gold2),var(--gold) 60%,#9a7a16);color:#191204;
+  box-shadow:0 10px 30px rgba(201,162,39,.35)}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.06)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tags button{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.82rem;
+  color:#e8d9b5;background:transparent;cursor:pointer}
+.tags button:hover{background:rgba(201,162,39,.2)}
+#result{background:var(--paper);color:var(--ink);border-radius:20px;padding:26px;min-height:80px}
+#result h3{color:var(--ink);margin-top:0}
+#result ol{padding-left:24px;font-size:1.05rem}
+#result li{margin:8px 0;padding:6px 10px;background:#fff;border:1px solid #e7dcc3;border-radius:10px}
+.total{color:#7a6c52;font-style:italic}
+.error{color:#a02020;background:#fdecec;border:1px solid #f3b6b6;padding:14px;border-radius:12px}
+.hint{color:#8b7f6a;text-align:center}
+.group{background:#fff;border:1px solid #e7dcc3;border-radius:14px;padding:16px;margin-bottom:16px}
+.group h3{color:var(--gold-deep);margin:0 0 10px}
+.person{margin-bottom:12px}
+.person>b{color:var(--ink)}
+.person small{color:#8b7f6a}
+.piece{margin-left:18px;color:#4a4033;font-size:.93rem}
+.footer{margin-top:26px;text-align:center;color:#8f8163;font-size:.82rem}
+.footer a{color:var(--gold2);text-decoration:none;font-weight:700}
+@media(max-width:600px){
+  .card,#result{padding:20px}
+  .btn{width:100%}
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-in">
+      <a class="brand" href="https://github.com/Dyman17/qosperne" title="Лендинг Qos Perne">
+        <span class="brand-mark">QP</span>
+        <span><strong>QOS PERNE</strong><small>репертуар • база</small></span>
+      </a>
+      <div class="top-links">
+        <!-- TODO: заменить ссылку на URL лендинга после деплоя -->
+        <a class="btn btn-ghost" style="padding:9px 18px;font-size:.82rem" href="https://github.com/Dyman17/qosperne">Лендинг</a>
+        <a class="btn btn-gold" style="padding:9px 18px;font-size:.82rem" href="https://chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <p class="eyebrow">Qos Perne • Домбыра клубы</p>
+    <h1>Кім қандай <em>күй</em> біледі?</h1>
+    <p class="sub">Күй атын жаз — сол шығарманы білетін қатысушылар шығады.
+      Поиск работает по базе клуба (Үлкен топ + Кіші топ).</p>
+
+    <div class="stats" id="stats">
+      <div class="stat"><b>…</b><span>жүктелуде…</span></div>
+    </div>
+
+    <div class="card">
+      <label for="piece">Шығарма / Произведение</label>
+      <input id="piece" placeholder="Мысалы: Адай" autofocus autocomplete="off">
+      <label for="count">Қатысушы саны (бос қалдыр — бәрі)</label>
+      <input id="count" type="number" placeholder="Оставьте пустым для всех" min="1" max="1000">
+      <div class="btnrow">
+        <button class="btn btn-gold" id="search">Іздеу • Найти</button>
+        <button class="btn btn-ghost" id="copy">Көшіру</button>
+        <button class="btn btn-ghost" id="show-all">Барлық репертуар</button>
+      </div>
+      <div class="tags" id="tags"></div>
+    </div>
+
+    <div id="result"><p class="hint">Күй атын жазып, «Іздеу» түймесін бас 🌙</p></div>
+
+    <p class="footer">Qos Perne • NIS домбыра клубы •
+      <a href="https://chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g" target="_blank" rel="noopener">WhatsApp-қа қосылу</a></p>
+  </div>
+
+<script>
+const $ = id => document.getElementById(id);
+const resultDiv = $('result');
+
+// Статистика сверху: группы + число кюйев
+(async () => {
+  try {
+    const [repRes, piecesRes] = await Promise.all([fetch('/api/repertoire'), fetch('/api/pieces')]);
+    const rep = await repRes.json();
+    const pieces = await piecesRes.json();
+    const groups = Object.entries(rep).map(([name, arr]) =>
+      `<div class="stat"><b>${arr.length}</b><span>${name}</span></div>`).join('');
+    $('stats').innerHTML = groups + `<div class="stat"><b>${pieces.length}</b><span>күй • произведений</span></div>`;
+    // Быстрые теги из первых популярных кюйев
+    const popular = ['Адай','Балбырауын','Ерке сылқым','Сарыарқа','Көроғлы','Ер Тұран'];
+    const existing = new Set(pieces.map(p => (p.title || '').toLowerCase()));
+    $('tags').innerHTML = popular.filter(t => existing.has(t.toLowerCase()))
+      .map(t => `<button data-piece="${t}">${t}</button>`).join('');
+    document.querySelectorAll('#tags button').forEach(b =>
+      b.addEventListener('click', () => { $('piece').value = b.dataset.piece; doSearch(); }));
+  } catch (e) { $('stats').innerHTML = '<div class="stat"><b>!</b><span>база жүктелмеді</span></div>'; }
+})();
+
+async function doSearch() {
+  const piece = $('piece').value.trim();
+  const count = $('count').value || '';
+  if (!piece) { resultDiv.innerHTML = '<div class="error">Күй атын жазшы — введи название произведения</div>'; return; }
+  resultDiv.innerHTML = '<p class="hint">Ізделуде… 🌙</p>';
+  try {
+    const url = count ? `/api/search?piece=${encodeURIComponent(piece)}&count=${count}` : `/api/search?piece=${encodeURIComponent(piece)}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (!data.length) { resultDiv.innerHTML = `<div class="error">«${piece}» — ешкім білмейді. Никто не знает это произведение.</div>`; return; }
+    resultDiv.innerHTML = `<h3>«${piece}» білетіндер:</h3><ol>` +
+      data.map(p => `<li>${p.name}</li>`).join('') + `</ol>` +
+      `<p class="total">Барлығы: ${data.length}</p>`;
+  } catch (e) { resultDiv.innerHTML = `<div class="error">Іздеу қатесі: ${e.message}</div>`; }
+}
+
+$('search').onclick = doSearch;
+$('piece').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+$('count').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+$('copy').onclick = () => {
+  const text = resultDiv.innerText || resultDiv.textContent;
+  if (!text.trim() || text.includes('Іздеу') || text.includes('Ізделуде')) { alert('Көшіретін ештеңе жоқ — нет данных'); return; }
+  navigator.clipboard.writeText(text).then(() => alert('Көшірілді! Скопировано ✅'))
+    .catch(() => alert('Көшіру сәтсіз — не удалось скопировать'));
+};
+
+$('show-all').onclick = async () => {
+  resultDiv.innerHTML = '<p class="hint">Жүктелуде…</p>';
+  try {
+    const res = await fetch('/api/repertoire');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    let html = '<h3>Барлық репертуар</h3>';
+    for (const groupName in data) {
+      html += `<div class="group"><h3>${groupName} (${data[groupName].length})</h3>`;
+      for (const p of data[groupName]) {
+        const sorted = [...p['Репертуар']].sort();
+        html += `<div class="person"><b>${p['Есім']}</b> <small>(${p['Репертуар'].length})</small>` +
+          sorted.map(s => `<div class="piece">• ${s}</div>`).join('') + `</div>`;
+      }
+      html += `</div>`;
+    }
+    resultDiv.innerHTML = html;
+  } catch (e) { resultDiv.innerHTML = `<div class="error">Жүктеу қатесі: ${e.message}</div>`; }
+};
+</script>
+</body>
+</html>
