@@ -31,6 +31,12 @@ export default function App() {
         {/* Editorial NIS Hero with Photo Banner */}
         <Hero onOpenRegister={() => setIsRegisterOpen(true)} />
 
+        {/* Join Club & WhatsApp QR — Right at the top for instant registration */}
+        <JoinSection 
+          onOpenRegister={() => setIsRegisterOpen(true)} 
+          onShowToast={showToast}
+        />
+
         {/* About Club — 2 Column Layout */}
         <About onOpenRegister={() => setIsRegisterOpen(true)} />
 
@@ -48,12 +54,6 @@ export default function App() {
 
         {/* FAQ Accordion */}
         <FAQ />
-
-        {/* Join Club & WhatsApp QR */}
-        <JoinSection 
-          onOpenRegister={() => setIsRegisterOpen(true)} 
-          onShowToast={showToast}
-        />
       </main>
 
       {/* Corporate Light Footer */}

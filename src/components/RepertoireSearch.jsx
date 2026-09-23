@@ -36,7 +36,7 @@ export default function RepertoireSearch({ onShowToast }) {
   };
 
   return (
-    <section className="section section-alt repertoire-section" id="repertoire">
+    <section className="section repertoire-section" id="repertoire">
       <div className="container">
         
         <div className="sec-header">

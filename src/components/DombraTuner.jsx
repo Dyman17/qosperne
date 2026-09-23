@@ -76,7 +76,7 @@ export default function DombraTuner() {
   };
 
   return (
-    <section className="section tuner-section" id="tuner">
+    <section className="section section-alt tuner-section" id="tuner">
       <div className="container">
         <div className="sec-header">
           <span className="eyebrow">

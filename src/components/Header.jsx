@@ -26,13 +26,13 @@ export default function Header({ onOpenRegister }) {
 
           {/* Desktop Navigation */}
           <nav className="nav-links">
+            <a href="#join" className="nav-join-link">Клубқа қосылу</a>
             <a href="#about">Біз туралы</a>
             <a href="#achievements">Жетістіктер</a>
             <a href="#repertoire">Репертуар</a>
             <a href="#tuner">Тюнер</a>
             <a href="#gallery">Галерея</a>
             <a href="#faq">Сұрақ-жауап</a>
-            <a href="#join">Қосылу</a>
           </nav>
 
           {/* Desktop & Mobile Actions */}
@@ -86,13 +86,13 @@ export default function Header({ onOpenRegister }) {
         </div>
 
         <nav className="drawer-nav">
+          <a href="#join" onClick={closeMenu} style={{ color: 'var(--brand-strong)', fontWeight: '700' }}>✦ Клубқа қосылу</a>
           <a href="#about" onClick={closeMenu}>Біз туралы</a>
           <a href="#achievements" onClick={closeMenu}>Жетістіктер</a>
           <a href="#repertoire" onClick={closeMenu}>Репертуар қоры</a>
           <a href="#tuner" onClick={closeMenu}>Домбыра бұрау (Тюнер)</a>
           <a href="#gallery" onClick={closeMenu}>Галерея</a>
           <a href="#faq" onClick={closeMenu}>Сұрақ-жауап</a>
-          <a href="#join" onClick={closeMenu}>Клубқа қосылу</a>
         </nav>
 
         <div className="drawer-footer">

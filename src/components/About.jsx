@@ -3,7 +3,7 @@ import { ArrowRight, Music, Users, Calendar, Award } from 'lucide-react';
 
 export default function About({ onOpenRegister }) {
   return (
-    <section className="section section-alt about-section" id="about">
+    <section className="section about-section" id="about">
       <div className="container">
         
         <div className="sec-header">

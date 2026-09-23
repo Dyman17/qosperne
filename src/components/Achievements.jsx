@@ -10,7 +10,7 @@ export default function Achievements() {
     : ACHIEVEMENTS.filter(a => a.category.includes(filter));
 
   return (
-    <section className="section achievements-section" id="achievements">
+    <section className="section section-alt achievements-section" id="achievements">
       <div className="container">
         
         <div className="sec-header">

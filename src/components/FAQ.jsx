@@ -32,7 +32,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="section faq-section" id="faq">
+    <section className="section section-alt faq-section" id="faq">
       <div className="container">
         <div className="sec-header">
           <div className="eyebrow">
