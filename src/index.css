@@ -2493,6 +2493,411 @@ a {
 }
 
 /* ==========================================================================
+   NAVIGATION TOOLS PILL & HIGHLIGHTS
+   ========================================================================== */
+
+.nav-tools-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  background-color: var(--brand-soft);
+  color: var(--brand-soft-text);
+  font-weight: 700;
+  font-size: 0.84rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(103, 166, 0, 0.25);
+  transition: all 150ms ease;
+}
+
+.nav-tools-pill:hover {
+  background-color: #dcf2b0;
+  color: var(--brand-strong);
+  border-color: var(--brand-strong);
+}
+
+.nav-tools-pill.active {
+  background-color: var(--brand-strong);
+  color: #ffffff;
+  border-color: var(--brand-strong);
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #67a600;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(103, 166, 0, 0.2);
+  animation: pulse-dot 2s infinite;
+}
+
+.nav-tools-pill.active .badge-dot {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.9); opacity: 0.75; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.75; }
+}
+
+.drawer-highlight-link {
+  background-color: var(--brand-soft) !important;
+  color: var(--brand-soft-text) !important;
+  font-weight: 700 !important;
+  border-radius: 8px;
+  border: 1px solid rgba(103, 166, 0, 0.25);
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   REPERTOIRE SUBMISSION BLOCK (Home Page Interactive Kuy Adder)
+   ========================================================================== */
+
+.submission-section {
+  background-color: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.submission-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 640px) {
+  .submission-card {
+    padding: 32px 36px;
+  }
+}
+
+.submission-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.submission-quick-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.custom-kui-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.custom-kui-input-row .input-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.submission-selected-box {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selected-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--text);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selected-kuis-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selected-kui-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px 4px 12px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.remove-kui-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 50%;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.remove-kui-btn:hover {
+  color: #dc2626;
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+.submission-submit-row {
+  margin-top: 6px;
+}
+
+/* Submission Success State */
+.submission-success-view {
+  text-align: center;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submission-success-icon {
+  margin-bottom: 14px;
+}
+
+.submission-success-title {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.submission-success-text {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 18px;
+}
+
+.submission-kuis-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  max-width: 540px;
+  margin-bottom: 24px;
+}
+
+.kui-summary-badge {
+  font-size: 0.82rem;
+  padding: 4px 10px;
+}
+
+.submission-success-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .submission-success-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .submission-success-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   DEDICATED TOOLS PAGE (Repertoire Search & Dombra Tuner Portal)
+   ========================================================================== */
+
+.tools-page {
+  background-color: var(--bg);
+  min-height: 80vh;
+}
+
+.tools-top-bar {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+  position: sticky;
+  top: 60px;
+  z-index: 90;
+}
+
+.tools-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tools-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+}
+
+.tools-bar-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background-color: var(--brand-soft);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.tools-hero {
+  background: linear-gradient(180deg, #f4f8ee 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 0 28px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .tools-hero {
+    padding: 50px 0 40px;
+  }
+}
+
+.tools-hero-content {
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tools-hero-title {
+  font-size: 1.55rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 640px) {
+  .tools-hero-title {
+    font-size: 2.1rem;
+    margin-bottom: 12px;
+  }
+}
+
+.tools-hero-desc {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .tools-hero-desc {
+    font-size: 1.05rem;
+  }
+}
+
+/* Tools Tab Switcher */
+.tools-tab-switcher {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e6ebdf;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  gap: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tools-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.tools-tab-btn:hover {
+  color: var(--text);
+}
+
+.tools-tab-btn.active {
+  background-color: #ffffff;
+  color: var(--brand-strong);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.tools-section-block {
+  padding: 10px 0;
+}
+
+/* Tools Bottom CTA */
+.tools-bottom-cta {
+  padding: 40px 0 60px;
+}
+
+.tools-cta-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 20px;
+  border: 1px dashed var(--brand-strong);
+  background-color: #fcfdfa;
+}
+
+@media (min-width: 768px) {
+  .tools-cta-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 36px;
+  }
+}
+
+.tools-cta-info {
+  max-width: 580px;
+}
+
+.tools-cta-title {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.tools-cta-desc {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
    ACCESSIBILITY: PREFERS-REDUCED-MOTION
    ========================================================================== */
 
@@ -2504,3 +2909,4 @@ a {
     scroll-behavior: auto !important;
   }
 }
+

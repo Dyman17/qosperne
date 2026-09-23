@@ -1,26 +1,38 @@
-import React, { useState, useMemo } from 'react';
-import { Search, Copy, Check, ChevronDown, ChevronUp, BookOpen, Music } from 'lucide-react';
-import { ALL_STUDENTS, KUI_STATS, POPULAR_KUIS } from '../data/repertoireData';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Search, Copy, Check, ChevronDown, ChevronUp, BookOpen, Music, Users, Sparkles } from 'lucide-react';
+import { getAllStudents, computeKuiStats, POPULAR_KUIS } from '../data/repertoireData';
 
 export default function RepertoireSearch({ onShowToast }) {
+  const [students, setStudents] = useState(() => getAllStudents());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('all');
   const [copied, setCopied] = useState(false);
   const [showCatalog, setShowCatalog] = useState(false);
+
+  // Listen for newly added students
+  useEffect(() => {
+    const handleUpdate = () => {
+      setStudents(getAllStudents());
+    };
+    window.addEventListener('qos_perne_repertoire_updated', handleUpdate);
+    return () => window.removeEventListener('qos_perne_repertoire_updated', handleUpdate);
+  }, []);
+
+  const kuiStats = useMemo(() => computeKuiStats(students), [students]);
 
   // Search logic
   const filteredStudents = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
 
-    return ALL_STUDENTS.filter(student => {
+    return students.filter(student => {
       if (selectedGroup !== 'all' && student.group !== selectedGroup) return false;
       const matchesKui = student.repertoire.some(kui => kui.toLowerCase().includes(q));
       const matchesName = student.name.toLowerCase().includes(q) || 
                           (student.classGrade && student.classGrade.toLowerCase().includes(q));
       return matchesKui || matchesName;
     });
-  }, [searchQuery, selectedGroup]);
+  }, [students, searchQuery, selectedGroup]);
 
   // Copy to clipboard
   const handleCopy = () => {
@@ -177,14 +189,14 @@ export default function RepertoireSearch({ onShowToast }) {
             >
               <div className="toggle-left">
                 <Music size={18} color="#67a600" />
-                <span>Барлық ресми күйлер қоры ({KUI_STATS.length} күй)</span>
+                <span>Барлық ресми күйлер қоры ({kuiStats.length} күй)</span>
               </div>
               {showCatalog ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
             </button>
 
             {showCatalog && (
               <div className="rep-catalog-grid">
-                {KUI_STATS.map((kui) => (
+                {kuiStats.map((kui) => (
                   <button
                     type="button"
                     key={kui.title}

@@ -569,3 +569,57 @@ export const POPULAR_KUIS = [
   'Сарыарқа',
   'Алаш аманаты'
 ];
+
+const STORAGE_KEY = 'qos_perne_custom_students';
+
+export function getCustomStudents() {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+export function getAllStudents() {
+  const custom = getCustomStudents();
+  return [...custom, ...ALL_STUDENTS];
+}
+
+export function addStudentToRepertoire(newStudent) {
+  try {
+    const existing = getCustomStudents();
+    const updated = [newStudent, ...existing];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('qos_perne_repertoire_updated'));
+    }
+    return true;
+  } catch (e) {
+    console.error('Failed to save student:', e);
+    return false;
+  }
+}
+
+export function computeKuiStats(students = getAllStudents()) {
+  const kuiMap = new Map();
+  students.forEach(student => {
+    (student.repertoire || []).forEach(kui => {
+      const normalized = kui.trim();
+      if (!normalized) return;
+      if (!kuiMap.has(normalized)) {
+        kuiMap.set(normalized, {
+          title: normalized,
+          players: [],
+          count: 0
+        });
+      }
+      const entry = kuiMap.get(normalized);
+      entry.players.push(student);
+      entry.count += 1;
+    });
+  });
+
+  return Array.from(kuiMap.values()).sort((a, b) => b.count - a.count);
+}

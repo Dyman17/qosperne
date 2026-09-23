@@ -3,17 +3,45 @@ import { Menu, X, MessageCircle, UserPlus } from 'lucide-react';
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g";
 
-export default function Header({ onOpenRegister }) {
+export default function Header({ onOpenRegister, currentPage = 'home', onNavigateHome, onNavigateToRepertoire }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const closeMenu = () => setMobileMenuOpen(false);
+
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (currentPage !== 'home') {
+      onNavigateHome?.();
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(sectionId);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleToolsClick = (e) => {
+    e.preventDefault();
+    closeMenu();
+    onNavigateToRepertoire?.();
+  };
+
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    closeMenu();
+    onNavigateHome?.();
+  };
 
   return (
     <>
       <header className="navbar">
         <div className="nav-container">
           {/* Dual Logos (Qos Perne + NIS) */}
-          <a href="#top" className="nav-brand" onClick={closeMenu}>
+          <a href="/" className="nav-brand" onClick={handleHomeClick}>
             <div className="nav-brand-logos">
               <img src="/qos_perne_logo.jpg" alt="Qos-Perne Logo" className="brand-logo-qp" />
               <img src="/logo_NIS.png" alt="NIS Logo" className="brand-logo-nis" />
@@ -26,13 +54,35 @@ export default function Header({ onOpenRegister }) {
 
           {/* Desktop Navigation */}
           <nav className="nav-links">
-            <a href="#join" className="nav-join-link">Клубқа қосылу</a>
-            <a href="#about">Біз туралы</a>
-            <a href="#achievements">Жетістіктер</a>
-            <a href="#repertoire">Репертуар</a>
-            <a href="#tuner">Тюнер</a>
-            <a href="#gallery">Галерея</a>
-            <a href="#faq">Сұрақ-жауап</a>
+            <a href="/" onClick={handleHomeClick} className={currentPage === 'home' ? 'active-link' : ''}>
+              Басты бет
+            </a>
+            <a href="#join" onClick={(e) => handleNavClick(e, 'join')}>
+              Клубқа қосылу
+            </a>
+            <a href="#submit-repertoire" onClick={(e) => handleNavClick(e, 'submit-repertoire')}>
+              Күй қосу
+            </a>
+            <a href="#about" onClick={(e) => handleNavClick(e, 'about')}>
+              Біз туралы
+            </a>
+            <a href="#achievements" onClick={(e) => handleNavClick(e, 'achievements')}>
+              Жетістіктер
+            </a>
+            <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>
+              Галерея
+            </a>
+            <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')}>
+              Сұрақ-жауап
+            </a>
+            <a
+              href="/repertoire"
+              className={`nav-tools-pill ${currentPage === 'repertoire' ? 'active' : ''}`}
+              onClick={handleToolsClick}
+            >
+              <span>Репертуар мен Тюнер</span>
+              <span className="badge-dot" />
+            </a>
           </nav>
 
           {/* Desktop & Mobile Actions */}
@@ -86,13 +136,34 @@ export default function Header({ onOpenRegister }) {
         </div>
 
         <nav className="drawer-nav">
-          <a href="#join" onClick={closeMenu} style={{ color: 'var(--brand-strong)', fontWeight: '700' }}>✦ Клубқа қосылу</a>
-          <a href="#about" onClick={closeMenu}>Біз туралы</a>
-          <a href="#achievements" onClick={closeMenu}>Жетістіктер</a>
-          <a href="#repertoire" onClick={closeMenu}>Репертуар қоры</a>
-          <a href="#tuner" onClick={closeMenu}>Домбыра бұрау (Тюнер)</a>
-          <a href="#gallery" onClick={closeMenu}>Галерея</a>
-          <a href="#faq" onClick={closeMenu}>Сұрақ-жауап</a>
+          <a href="/" onClick={handleHomeClick}>
+            Басты бет
+          </a>
+          <a
+            href="/repertoire"
+            onClick={handleToolsClick}
+            className="drawer-highlight-link"
+          >
+            🎵 Репертуар базасы мен Тюнер ↗
+          </a>
+          <a href="#submit-repertoire" onClick={(e) => handleNavClick(e, 'submit-repertoire')}>
+            ✍️ Өз күйіңді базаға қос
+          </a>
+          <a href="#join" onClick={(e) => handleNavClick(e, 'join')}>
+            Клубқа жазылу
+          </a>
+          <a href="#about" onClick={(e) => handleNavClick(e, 'about')}>
+            Біз туралы
+          </a>
+          <a href="#achievements" onClick={(e) => handleNavClick(e, 'achievements')}>
+            Жетістіктер
+          </a>
+          <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>
+            Галерея
+          </a>
+          <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')}>
+            Сұрақ-жауап
+          </a>
         </nav>
 
         <div className="drawer-footer">
