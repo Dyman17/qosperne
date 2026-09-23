@@ -29,12 +29,13 @@ export default function Header({ onOpenRegister }) {
             <a href="#about">Біз туралы</a>
             <a href="#achievements">Жетістіктер</a>
             <a href="#repertoire">Репертуар</a>
+            <a href="#tuner">Тюнер</a>
             <a href="#gallery">Галерея</a>
             <a href="#faq">Сұрақ-жауап</a>
             <a href="#join">Қосылу</a>
           </nav>
 
-          {/* Desktop Actions */}
+          {/* Desktop & Mobile Actions */}
           <div className="nav-actions">
             <button
               onClick={onOpenRegister}
@@ -48,9 +49,10 @@ export default function Header({ onOpenRegister }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-whatsapp btn-sm nav-wa-btn"
+              title="WhatsApp тобына өту"
             >
               <MessageCircle size={15} />
-              <span>WhatsApp</span>
+              <span className="nav-wa-text">WhatsApp</span>
             </a>
             <button
               className="nav-burger"
@@ -87,6 +89,7 @@ export default function Header({ onOpenRegister }) {
           <a href="#about" onClick={closeMenu}>Біз туралы</a>
           <a href="#achievements" onClick={closeMenu}>Жетістіктер</a>
           <a href="#repertoire" onClick={closeMenu}>Репертуар қоры</a>
+          <a href="#tuner" onClick={closeMenu}>Домбыра бұрау (Тюнер)</a>
           <a href="#gallery" onClick={closeMenu}>Галерея</a>
           <a href="#faq" onClick={closeMenu}>Сұрақ-жауап</a>
           <a href="#join" onClick={closeMenu}>Клубқа қосылу</a>

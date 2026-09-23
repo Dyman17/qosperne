@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
-import { MessageCircle, UserPlus, Copy, Check, QrCode } from 'lucide-react';
+import React from 'react';
+import { MessageCircle, UserPlus, ExternalLink, QrCode } from 'lucide-react';
 
 const WHATSAPP_URL = "https://chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g";
 
-export default function JoinSection({ onOpenRegister, onShowToast }) {
-  const [copiedLink, setCopiedLink] = useState(false);
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(WHATSAPP_URL).then(() => {
-      setCopiedLink(true);
-      onShowToast?.('WhatsApp сілтемесі көшірілді');
-      setTimeout(() => setCopiedLink(false), 2000);
-    });
-  };
-
+export default function JoinSection({ onOpenRegister }) {
   return (
     <section className="section section-alt join-section" id="join">
       <div className="container">
@@ -30,8 +20,8 @@ export default function JoinSection({ onOpenRegister, onShowToast }) {
               <p className="join-description">
                 Домбыра клубы мектептің барлық оқушыларына есігін айқара ашады. 
                 Арнайы музыкалық білім немесе жеке аспап талап етілмейді. 
-                Төмендегі батырмалар арқылы біздің ресми WhatsApp тобымызға 
-                қосылыңыз немесе онлайн өтінім қалдырыңыз.
+                Төмендегі батырма арқылы ресми WhatsApp тобымызға бірден өтіңіз 
+                немесе онлайн өтінім қалдырыңыз.
               </p>
 
               <div className="join-buttons-row">
@@ -39,32 +29,32 @@ export default function JoinSection({ onOpenRegister, onShowToast }) {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-whatsapp btn-lg"
+                  className="btn btn-whatsapp btn-lg join-wa-btn"
                 >
                   <MessageCircle size={18} />
-                  <span>WhatsApp тобына өту</span>
+                  <span>WhatsApp тобына тікелей өту</span>
+                  <ExternalLink size={15} />
                 </a>
 
                 <button 
                   onClick={onOpenRegister}
-                  className="btn btn-secondary btn-lg"
+                  className="btn btn-secondary btn-lg join-reg-btn"
                 >
                   <UserPlus size={18} />
                   <span>Онлайн өтінім беру</span>
                 </button>
               </div>
 
-              <div className="join-link-copy-row">
-                <span className="join-link-label">Топ сілтемесі:</span>
-                <code className="join-link-code">chat.whatsapp.com/FAgVLbx...</code>
-                <button
-                  onClick={handleCopyLink}
-                  className="btn btn-secondary btn-sm copy-btn"
-                  title="Сілтемені көшіру"
+              <div className="join-direct-link-row">
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="join-direct-link"
                 >
-                  {copiedLink ? <Check size={14} color="#67a600" /> : <Copy size={14} />}
-                  <span>{copiedLink ? 'Көшірілді' : 'Көшіру'}</span>
-                </button>
+                  <span>Тікелей сілтеме: <strong>chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g</strong></span>
+                  <ExternalLink size={14} />
+                </a>
               </div>
             </div>
 

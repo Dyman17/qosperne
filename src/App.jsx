@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Achievements from './components/Achievements';
 import RepertoireSearch from './components/RepertoireSearch';
+import DombraTuner from './components/DombraTuner';
 import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import JoinSection from './components/JoinSection';
@@ -38,6 +39,9 @@ export default function App() {
 
         {/* Repertoire Registry & Student Search */}
         <RepertoireSearch onShowToast={showToast} />
+
+        {/* Interactive Dombra Tuner */}
+        <DombraTuner />
 
         {/* Gallery 16:10 Grid */}
         <Gallery />

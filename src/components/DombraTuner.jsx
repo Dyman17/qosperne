@@ -92,20 +92,23 @@ export default function DombraTuner() {
           </p>
         </div>
 
-        <div className="card-white tuner-card" style={{ padding: '28px' }}>
-          <div className="tuner-fretboard" style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '24px' }}>
+        <div className="card-white tuner-card">
+          <div className="tuner-fretboard">
             {/* Upper string - Re (D4) */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>1-ішек (Жоғарғы)</span>
-                <strong style={{ fontSize: '1.1rem', color: 'var(--text)' }}>Ре (D4)</strong>
-                <span style={{ fontSize: '0.8rem', color: 'var(--brand-strong)', marginLeft: '8px' }}>293.7 Гц</span>
+            <div className={`tuner-string-row ${playingString === 'D4' || playingString === 'both' ? 'active' : ''}`}>
+              <div className="tuner-string-info">
+                <span className="tuner-string-label">1-ішек (Жоғарғы)</span>
+                <div className="tuner-note-hz-row">
+                  <strong className="tuner-string-note">Ре (D4)</strong>
+                  <span className="tuner-string-hz">293.7 Гц</span>
+                </div>
               </div>
 
               <button
                 type="button"
-                className={`btn btn-sm ${playingString === 'D4' || playingString === 'both' ? 'btn-primary' : 'btn-secondary'}`}
+                className={`btn btn-sm tuner-play-btn ${playingString === 'D4' || playingString === 'both' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => playDombraTone(293.66, 'D4')}
+                aria-label="Ре дыбысын ойнау"
               >
                 <Play size={14} />
                 <span>Ойнау</span>
@@ -113,17 +116,20 @@ export default function DombraTuner() {
             </div>
 
             {/* Lower string - Sol (G3) */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', background: 'var(--bg)', borderRadius: '8px', border: '1px solid var(--border)' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block' }}>2-ішек (Төменгі)</span>
-                <strong style={{ fontSize: '1.1rem', color: 'var(--text)' }}>Соль (G3)</strong>
-                <span style={{ fontSize: '0.8rem', color: 'var(--brand-strong)', marginLeft: '8px' }}>196.0 Гц</span>
+            <div className={`tuner-string-row ${playingString === 'G3' || playingString === 'both' ? 'active' : ''}`}>
+              <div className="tuner-string-info">
+                <span className="tuner-string-label">2-ішек (Төменгі)</span>
+                <div className="tuner-note-hz-row">
+                  <strong className="tuner-string-note">Соль (G3)</strong>
+                  <span className="tuner-string-hz">196.0 Гц</span>
+                </div>
               </div>
 
               <button
                 type="button"
-                className={`btn btn-sm ${playingString === 'G3' || playingString === 'both' ? 'btn-primary' : 'btn-secondary'}`}
+                className={`btn btn-sm tuner-play-btn ${playingString === 'G3' || playingString === 'both' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => playDombraTone(196.00, 'G3')}
+                aria-label="Соль дыбысын ойнау"
               >
                 <Play size={14} />
                 <span>Ойнау</span>
@@ -131,15 +137,15 @@ export default function DombraTuner() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              <Info size={16} color="#67a600" />
-              <span>Дыбыс Web Audio API синтезаторы арқылы шынайы табиғи бұрау жиілігімен ойнатылады</span>
+          <div className="tuner-bottom-row">
+            <div className="tuner-hint">
+              <Info size={16} className="tuner-hint-icon" />
+              <span>Web Audio API: шынайы домбыра бұрауы</span>
             </div>
 
             <button
               type="button"
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm tuner-strum-btn"
               onClick={playStrum}
             >
               <Disc3 size={15} />
