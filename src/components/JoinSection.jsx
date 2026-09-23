@@ -52,7 +52,8 @@ export default function JoinSection({ onOpenRegister }) {
                   rel="noopener noreferrer"
                   className="join-direct-link"
                 >
-                  <span>Тікелей сілтеме: <strong>chat.whatsapp.com/FAgVLbxew4SEcbsksGsS4g</strong></span>
+                  <MessageCircle size={15} />
+                  <span>Тікелей WhatsApp тобына өту</span>
                   <ExternalLink size={14} />
                 </a>
               </div>
